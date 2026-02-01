@@ -1,0 +1,27 @@
+[build-system]
+requires = ['hatchling']
+build-backend = 'hatchling.build'
+
+[project]
+name = "wsn-simulation"
+version = "0.1.1"
+description = "A simpy-based WSN simulator used as part of the bonus system of the Mobile Networks course of the Technical University of Darmstadt"
+authors = [
+    {name = "Luis Alves", email = "lalves@seemoo.tu-darmstadt.de"},
+    {name = "Frank Hessel", email = "fhessel@seemoo.tu-darmstadt.de"},
+    {name = "Prof. Utz Roedig", email = "u.roedig@cs.ucc.ie"},
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+	"simpy==4.1.1",
+]
+
+[project.urls]
+Repository = "https://git.rwth-aachen.de/seemoo-lab/mobnet/exercise/wsn-simulation-python.git"
+
+[project.scripts]
+simulate = "wsn_simulation.__main__:run"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wsn_simulation"]

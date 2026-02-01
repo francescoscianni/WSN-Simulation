@@ -1,0 +1,18 @@
+#ignore tests
+tests
+
+#ignore .lock
+*.lock
+
+#ignore venvs
+.venv
+venv
+
+#ignore pycache
+*__pycache__*
+
+#ignore pyenv's .python-version
+.python-version
+
+#ignore temporary files
+*~
