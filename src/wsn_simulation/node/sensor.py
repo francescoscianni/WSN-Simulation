@@ -8,8 +8,9 @@ if TYPE_CHECKING:
     from wsn_simulation.media import Media
     from wsn_simulation.node.core import NodeConfig
 
-from wsn_simulation.message import frame_to_json
+from wsn_simulation.message import Frame,Message,FloodBeaconMessage, frame_to_json
 from wsn_simulation.node.core import Node
+
 
 
 class Sensor(Node):
@@ -27,7 +28,7 @@ class Sensor(Node):
     - If you want to modify how `Sensor` nodes behave, this is the file
         to edit.
     """
-
+    
     def __init__(
         self, env: Environment, media: Media, config: NodeConfig
     ) -> None:
@@ -55,6 +56,7 @@ class Sensor(Node):
                 f"{self.config.node_posy})"
             )
         self.env.process(self._receive_process())
+        
 
     def _receive_process(self):
         """
@@ -68,10 +70,23 @@ class Sensor(Node):
         """
         while True:
             # Waits until the incoming media sees a frame
-            frame = yield self.media_in.get()
-
+            frame: Frame = yield self.media_in.get()
+            flood_id = frame.PAYLOAD.FLOOD_ID
+            is_new = flood_id not in self.flood_beacon_ids
             # If a message has actually been received, process it:
             if self.receive(frame) is not None:
-
                 # remove logging in your monte carlo runs for a little speed:
                 self.log(f"<-  receiving {frame_to_json(frame)}")
+                if frame.TYPE == "FLOOD_BEACON" and is_new:
+                    self.env.process(self._flood_process(frame))
+                    
+   
+    def _flood_process(self, frame: Frame):
+        for i in range(self.config.max_transmissions):
+            yield self.sleep(self.config.guard_time)
+            self.send(frame)
+                    
+                    
+                
+                
+                
