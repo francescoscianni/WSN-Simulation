@@ -18,7 +18,7 @@ venv
 *~
 
 #ignore zip files
-.zip
+*.zip
 
 #ignor ds
 .DS_Store
