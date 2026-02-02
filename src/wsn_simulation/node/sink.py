@@ -104,7 +104,7 @@ class Sink(Node):
             # If a message has actually been received, process it:
             if self.receive(frame) is not None:
                 # remove logging in your monte carlo runs for a little speed:
-                self.log(f"<-  receiving {frame_to_json(frame)}")
+                #self.log(f"<-  receiving {frame_to_json(frame)}")
                 if frame.TYPE == "FLOOD_BEACON" and is_new:
                     self.env.process(self._flood_process(frame))
 

@@ -16,3 +16,9 @@ venv
 
 #ignore temporary files
 *~
+
+#ignore zip files
+.zip
+
+#ignor ds
+.DS_store

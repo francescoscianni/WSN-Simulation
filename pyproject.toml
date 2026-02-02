@@ -14,14 +14,18 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-	"simpy==4.1.1",
+    "simpy==4.1.1",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
 ]
+
 
 [project.urls]
 Repository = "https://git.rwth-aachen.de/seemoo-lab/mobnet/exercise/wsn-simulation-python.git"
 
 [project.scripts]
 simulate = "wsn_simulation.__main__:run"
+monte-carlo = "wsn_simulation.monte_carlo:run_monte_carlo"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/wsn_simulation"]
