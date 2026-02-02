@@ -21,4 +21,4 @@ venv
 .zip
 
 #ignor ds
-.DS_store
+.DS_Store
